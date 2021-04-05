@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Project2_Group_4.Conversions;
+using Project2_Group_4.FileClasses;
+using System;
+using System.Collections.Generic;
 
 namespace Project2_Group_4
 {
@@ -6,14 +9,25 @@ namespace Project2_Group_4
     {
         static void Main(string[] args)
         {
+            const string DATA_PATH = "./Data/Project 2_INFO_5101.csv";
             // Load data
+            List<Data> dataset = CSVFile.CSVDeserialize(DATA_PATH);
 
-            // for each expression 
+            // Convert to postfix and store it in the data
+            PostfixConversion post = new PostfixConversion(dataset);
+            int count = 0;
+            Console.WriteLine("Sno \tPostfix");
+            foreach(string result in post.Convert())
+            {
+                dataset[count].Postfix = result;
+                Console.WriteLine(count + ":\t" + dataset[count].Postfix);
+                count++;
+            }
 
-                // Convert to postfix and store it in the data
-                // Convert to prefix and store it in the data
-                // Calculate postfix result and store it in the data
-                // Calculate prefix result and store it in the data
+            
+            // Convert to prefix and store it in the data
+            // Calculate postfix result and store it in the data
+            // Calculate prefix result and store it in the data
 
             // Display prefix results 
 

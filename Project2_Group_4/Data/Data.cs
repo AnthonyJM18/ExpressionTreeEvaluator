@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace Project2_Group_4
 {
-    class Data
+    public class Data
     {
-        int Sno;
-        string Equation;
-        string Prefix { get; set; } 
-        string Postfix { get; set; }
-        string PrefixResult { get; set; }
-        string PostfixResult { get; set; }
+        public int Sno;
+        public string Infix;
+        public string Prefix { get; set; } 
+        public string Postfix { get; set; }
+        public string PrefixResult { get; set; }
+        public string PostfixResult { get; set; }
         public Data(int s, string eq)
         {
             Sno = s;
-            Equation = eq;
+            Infix = eq;
+        }
+        public override string ToString()
+        {
+            return $"{Sno}: {Infix}";
         }
     }
 }
