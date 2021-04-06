@@ -68,8 +68,8 @@ namespace Project2_Group_4
                 outputFile.WriteEndRootElement();
             }
 
-            string path = Path.GetFullPath(XML_PATH);
-            System.Diagnostics.Process.Start("chrome.exe", $"\"{path}\"");
+            string absolutePath = Path.GetFullPath(XML_PATH);
+            System.Diagnostics.Process.Start("chrome.exe", $"\"{absolutePath}\"");
         }
     }
 }
