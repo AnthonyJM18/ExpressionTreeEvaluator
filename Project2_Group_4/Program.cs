@@ -18,19 +18,10 @@ namespace Project2_Group_4
             PostfixConversion post = new PostfixConversion(dataset);
             int count = 0;
             Console.WriteLine("Sno \tPostfix");
-            foreach(string result in post.Convert())
+            foreach (string result in post.Convert())
             {
                 dataset[count].Postfix = result;
                 Console.WriteLine(count + ":\t" + dataset[count].Postfix);
-                count++;
-            }
-            //Postfix evaluation
-            count = 0;
-            Console.WriteLine("Sno \tPostfixEVAL");
-            foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
-            {
-                dataset[count].PostfixResult = result;
-                Console.WriteLine(count + ":\t" + result);
                 count++;
             }
 
@@ -45,14 +36,31 @@ namespace Project2_Group_4
                 count++;
             }
             // Calculate postfix result and store it in the data
+            count = 0;
+            Console.WriteLine("Sno \tPostFix Res");
+            foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
+            {
+                dataset[count].PostfixResult = result;
+                Console.WriteLine(count + ":\t" + result);
+                count++;
+            }
+
             // Calculate prefix result and store it in the data
+            count = 0;
+            Console.WriteLine("Sno \tPrefix Res");
+            foreach (string result in ExpressionEvaluation.PreFixEvaluate(pre.Convert()))
+            {
+                dataset[count].PrefixResult = result;
+                Console.WriteLine(count + ":\t" + result);
+                count++;
+            }
 
             // Display prefix results 
 
             // Display postfix results
 
             // Display all results
-            Console.WriteLine($"Sno\t{"Infix".PadRight(20,' ')} {"Prefix".PadRight(15, ' ')} {"Postfix".PadRight(15, ' ')} {"Prefix Result".PadRight(15, ' ')} {"Postfix Result".PadRight(15, ' ')} {"Match".PadRight(15, ' ')}");
+            Console.WriteLine($"Sno\t{"Infix".PadRight(20, ' ')} {"Prefix".PadRight(15, ' ')} {"Postfix".PadRight(15, ' ')} {"Prefix Result".PadRight(15, ' ')} {"Postfix Result".PadRight(15, ' ')} {"Match".PadRight(15, ' ')}");
             foreach (Data d in dataset)
             {
                 Console.WriteLine($"{d.Sno}\t{d.Infix.PadRight(20, ' ')} {d.Prefix.PadRight(15, ' ')} {d.Postfix.PadRight(15, ' ')} {d.PrefixResult.PadRight(15, ' ')} {d.PostfixResult.PadRight(15, ' ')} {"Match".PadRight(15, ' ')}");
