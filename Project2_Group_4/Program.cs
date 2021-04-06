@@ -18,7 +18,7 @@ namespace Project2_Group_4
             PostfixConversion post = new PostfixConversion(dataset);
             int count = 0;
             Console.WriteLine("Sno \tPostfix");
-            foreach(string result in post.Convert())
+            foreach (string result in post.Convert())
             {
                 dataset[count].Postfix = result;
                 Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Postfix);
@@ -45,7 +45,24 @@ namespace Project2_Group_4
                 count++;
             }
             // Calculate postfix result and store it in the data
+            count = 0;
+            Console.WriteLine("Sno \tPostFix Res");
+            foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
+            {
+                dataset[count].PostfixResult = result;
+                Console.WriteLine(count + ":\t" + result);
+                count++;
+            }
+
             // Calculate prefix result and store it in the data
+            count = 0;
+            Console.WriteLine("Sno \tPrefix Res");
+            foreach (string result in ExpressionEvaluation.PreFixEvaluate(pre.Convert()))
+            {
+                dataset[count].PrefixResult = result;
+                Console.WriteLine(count + ":\t" + result);
+                count++;
+            }
 
             // Display prefix results 
 

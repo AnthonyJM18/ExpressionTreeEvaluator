@@ -13,7 +13,7 @@ namespace Project2_Group_4.Expressions
         {
             var leftNode = Expression.Constant(left);
             var rightNode = Expression.Constant(right);
-            switch(operand)
+            switch (operand)
             {
                 case "+":
                     var additionExpression = Expression.Add(leftNode, rightNode);
@@ -35,29 +35,58 @@ namespace Project2_Group_4.Expressions
         {
             try
             {
-                foreach(var postFixData in postFixDataSet)
+                foreach (var postFixData in postFixDataSet)
                 {
-                    Stack<string> i = new Stack<string>();
-                    double leftNode, rightNode;
+                    Stack<string> stack = new Stack<string>();
                     string answer;
                     for (int j = 0; j < postFixData.Length; j++)
                     {
-                        string c = postFixData.Substring(j, 1);
-                        if (!char.IsDigit(c[0]))
+                        if (!char.IsDigit(postFixData[j]))
                         {
-                            string right = i.Pop();
-                            string left = i.Pop();
-                            leftNode = Convert.ToDouble(left);
-                            rightNode = Convert.ToDouble(right);
-                            answer = Evaluate(leftNode, rightNode, c);
-                            i.Push(answer);
+                            double rightNode = Convert.ToDouble(stack.Pop());
+                            double leftNode = Convert.ToDouble(stack.Pop());
+                            answer = Evaluate(leftNode, rightNode, postFixData[j].ToString());
+                            stack.Push(answer);
                         }
                         else
                         {
-                            i.Push(postFixData.Substring(j, 1));
+                            stack.Push(postFixData.Substring(j, 1));
                         }
                     }
-                    yield return i.Pop();
+                    yield return stack.Pop();
+                }
+            }
+            finally
+            {
+                // Do nothing: this stops the iterator/yield
+            }
+        }
+
+        public static IEnumerable<string> PreFixEvaluate(IEnumerable<string> preFixDataSet)
+        {
+            try
+            {
+                foreach (var preFixData in preFixDataSet)
+                {
+                    Stack<string> stack = new Stack<string>();
+                    string answer;
+                    for (int j = preFixData.Length - 1; j >= 0; j--)
+                    {
+                        // if operand push to stack
+                        if (char.IsDigit(preFixData[j]))
+                        {
+                            stack.Push(preFixData[j].ToString());
+                        }
+                        else
+                        {
+                            double leftNode = Convert.ToDouble(stack.Pop());
+                            double rightNode = Convert.ToDouble(stack.Pop());
+
+                            answer = Evaluate(leftNode, rightNode, preFixData[j].ToString());
+                            stack.Push(answer);
+                        }
+                    }
+                    yield return stack.Pop();
                 }
             }
             finally
