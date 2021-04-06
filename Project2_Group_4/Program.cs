@@ -71,27 +71,40 @@ namespace Project2_Group_4
             }
 
             // Prompt user if they want to view the results in XML format
-            using (StreamWriter outputFile = new StreamWriter(XML_PATH))
+            ConsoleKey response;
+            do
             {
-                outputFile.WriteStartDocument();
-                outputFile.WriteStartRootElement();
+                Console.Write("\nWould you like to view the results in XML format? [Y/N]:");
+                response = Console.ReadKey(false).Key;   // true is intercept key (dont show), false is show
+                if (response != ConsoleKey.Enter)
+                    Console.WriteLine();
 
-                foreach(Data d in dataset)
+            } while (response != ConsoleKey.Y && response != ConsoleKey.N);
+
+            if (response == ConsoleKey.Y)
+            {
+                Console.WriteLine("XML Generated!");
+                using (StreamWriter outputFile = new StreamWriter(XML_PATH))
                 {
-                    outputFile.WriteStartElement();
-                    outputFile.WriteAttribute("sno", d.Sno.ToString());
-                    outputFile.WriteAttribute("infix", d.Infix);
-                    outputFile.WriteAttribute("prefix", d.Prefix);
-                    outputFile.WriteAttribute("postfix", d.Postfix);
-                    outputFile.WriteAttribute("evaluation", d.PostfixResult);
-                    outputFile.WriteAttribute("comparison", (ce.Compare(d.PrefixResult, d.PostfixResult) == 1 ? "True" : "False"));
-                    outputFile.WriteEndElement();
-                }
-                
-                outputFile.WriteEndRootElement();
-            }
+                    outputFile.WriteStartDocument();
+                    outputFile.WriteStartRootElement();
 
-            Process.Start(@"cmd.exe ", @$"/c start chrome {XML_PATH}");
+                    foreach (Data d in dataset)
+                    {
+                        outputFile.WriteStartElement();
+                        outputFile.WriteAttribute("sno", d.Sno.ToString());
+                        outputFile.WriteAttribute("infix", d.Infix);
+                        outputFile.WriteAttribute("prefix", d.Prefix);
+                        outputFile.WriteAttribute("postfix", d.Postfix);
+                        outputFile.WriteAttribute("evaluation", d.PostfixResult);
+                        outputFile.WriteAttribute("comparison", (ce.Compare(d.PrefixResult, d.PostfixResult) == 1 ? "True" : "False"));
+                        outputFile.WriteEndElement();
+                    }
+
+                    outputFile.WriteEndRootElement();
+                }
+                Process.Start(@"cmd.exe ", @$"/c start chrome {XML_PATH}");
+            } 
         }
     }
 }
