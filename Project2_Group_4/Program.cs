@@ -72,6 +72,7 @@ namespace Project2_Group_4
 
             // Prompt user if they want to view the results in XML format
             ConsoleKey response;
+            // Validation
             do
             {
                 Console.Write("\nWould you like to view the results in XML format? [Y/N]:");
@@ -81,9 +82,11 @@ namespace Project2_Group_4
 
             } while (response != ConsoleKey.Y && response != ConsoleKey.N);
 
+            // Generate XML if user selected yes, else don't
             if (response == ConsoleKey.Y)
             {
                 Console.WriteLine("XML Generated!");
+                // Uses XMLExtensions
                 using (StreamWriter outputFile = new StreamWriter(XML_PATH))
                 {
                     outputFile.WriteStartDocument();
@@ -103,6 +106,8 @@ namespace Project2_Group_4
 
                     outputFile.WriteEndRootElement();
                 }
+
+                // Opens XML in Google Chrome browser
                 Process.Start(@"cmd.exe ", @$"/c start chrome {XML_PATH}");
             } 
         }
