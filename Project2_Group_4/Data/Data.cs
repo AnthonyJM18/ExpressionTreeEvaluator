@@ -18,6 +18,10 @@ namespace Project2_Group_4
         {
             Sno = s;
             Infix = eq;
+            Prefix = "";
+            Postfix = "";
+            PrefixResult = "";
+            PostfixResult = "";
         }
         public override string ToString()
         {
