@@ -3,6 +3,8 @@ using Project2_Group_4.FileClasses;
 using Project2_Group_4.Expressions;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Diagnostics;
 
 namespace Project2_Group_4
 {
@@ -11,6 +13,7 @@ namespace Project2_Group_4
         static void Main(string[] args)
         {
             const string DATA_PATH = "./Data/Project 2_INFO_5101.csv";
+            const string XML_PATH = "./Data/Project2_INFO_5101.xml";
             // Load data
             List<Data> dataset = CSVFile.CSVDeserialize(DATA_PATH);
 
@@ -68,7 +71,27 @@ namespace Project2_Group_4
             }
 
             // Prompt user if they want to view the results in XML format
+            using (StreamWriter outputFile = new StreamWriter(XML_PATH))
+            {
+                outputFile.WriteStartDocument();
+                outputFile.WriteStartRootElement();
 
+                foreach(Data d in dataset)
+                {
+                    outputFile.WriteStartElement();
+                    outputFile.WriteAttribute("sno", d.Sno.ToString());
+                    outputFile.WriteAttribute("infix", d.Infix);
+                    outputFile.WriteAttribute("prefix", d.Prefix);
+                    outputFile.WriteAttribute("postfix", d.Postfix);
+                    outputFile.WriteAttribute("evaluation", d.PostfixResult);
+                    outputFile.WriteAttribute("comparison", (ce.Compare(d.PrefixResult, d.PostfixResult) == 1 ? "True" : "False"));
+                    outputFile.WriteEndElement();
+                }
+                
+                outputFile.WriteEndRootElement();
+            }
+
+            Process.Start(@"cmd.exe ", @$"/c start chrome {XML_PATH}");
         }
     }
 }
