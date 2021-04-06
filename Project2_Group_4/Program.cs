@@ -23,9 +23,16 @@ namespace Project2_Group_4
                 Console.WriteLine(count + ":\t" + dataset[count].Postfix);
                 count++;
             }
-
-            
             // Convert to prefix and store it in the data
+            PrefixConversion pre = new PrefixConversion(dataset);
+            count = 0;
+            Console.WriteLine("Sno \tPostfix");
+            foreach (string result in pre.Convert())
+            {
+                dataset[count].Prefix = result;
+                Console.WriteLine(count + ":\t" + dataset[count].Prefix);
+                count++;
+            }
             // Calculate postfix result and store it in the data
             // Calculate prefix result and store it in the data
 

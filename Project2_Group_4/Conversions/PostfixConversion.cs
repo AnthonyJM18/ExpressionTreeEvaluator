@@ -58,7 +58,7 @@ namespace Project2_Group_4.Conversions
                     while (command.Count > 0)
                     {
                         equation.Append(command.Pop()); 
-                        }
+                    }
                     yield return equation.ToString();
                 }
             } finally
