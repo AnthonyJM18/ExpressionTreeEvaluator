@@ -31,19 +31,19 @@ namespace Project2_Group_4.FileClasses
         public static void WriteStartElement(this StreamWriter stream)
         {
             // This method should add the element tag to the file
-            stream.WriteLine("<element>");
+            stream.WriteLine("\t<element>");
         }
 
         public static void WriteEndElement(this StreamWriter stream)
         {
             //This method should end the element tag
-            stream.WriteLine("</element>");
+            stream.WriteLine("\t</element>");
         }
 
-        public static void WriteAttribute(this StreamWriter stream, string attribute, string value)
+        public static void WriteAttribute(this StreamWriter stream, string key, string value)
         {
             // This method should add each attribute with its values
-            stream.WriteLine($"<{attribute}>{value}</{attribute}>");
+            stream.WriteLine($"\t\t<{key}>{value}</{key}>");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Project2_Group_4
         static void Main(string[] args)
         {
             const string DATA_PATH = "./Data/Project 2_INFO_5101.csv";
+            const string XML_PATH = "../../../Data/Project2_INFO_5101.xml";
             // Load data
             List<Data> dataset = CSVFile.CSVDeserialize(DATA_PATH);
 
@@ -54,12 +55,21 @@ namespace Project2_Group_4
             // Display all results
 
             // Prompt user if they want to view the results in XML format
-            using (StreamWriter outputFile = new StreamWriter(@"../../../Data/Project2_INFO_5101.xml"))
+            using (StreamWriter outputFile = new StreamWriter(XML_PATH))
             {
                 outputFile.WriteStartDocument();
                 outputFile.WriteStartRootElement();
+
+                outputFile.WriteStartElement();
+                outputFile.WriteAttribute("sno", "1");
+                outputFile.WriteEndElement();
+
+
                 outputFile.WriteEndRootElement();
             }
+
+            string path = Path.GetFullPath(XML_PATH);
+            System.Diagnostics.Process.Start("chrome.exe", $"\"{path}\"");
         }
     }
 }
