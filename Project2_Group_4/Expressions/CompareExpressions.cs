@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace Project2_Group_4.Expressions
 {
-    public class CompareExpressions : IComparer
+    public class CompareExpressions : IComparer<string>
     {
-        public int Compare(object x, object y)
+        public int Compare(string prefix, string postfix)
         {
-            // this should compare the results of the conversion process
-            throw new NotImplementedException();
+            if (prefix == postfix)
+                return 1;
+            else
+                return -1;
         }
     }
 }
