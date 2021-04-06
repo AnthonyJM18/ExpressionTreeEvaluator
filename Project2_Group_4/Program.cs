@@ -21,7 +21,16 @@ namespace Project2_Group_4
             foreach (string result in post.Convert())
             {
                 dataset[count].Postfix = result;
-                Console.WriteLine(count + ":\t" + dataset[count].Postfix);
+                Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Postfix);
+                count++;
+            }
+            //Postfix evaluation
+            count = 0;
+            Console.WriteLine("Sno \tPostfixEVAL");
+            foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
+            {
+                dataset[count].PostfixResult = result;
+                Console.WriteLine(dataset[count].Sno + ":\t" + result);
                 count++;
             }
 
@@ -32,7 +41,7 @@ namespace Project2_Group_4
             foreach (string result in pre.Convert())
             {
                 dataset[count].Prefix = result;
-                Console.WriteLine(count + ":\t" + dataset[count].Prefix);
+                Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Prefix);
                 count++;
             }
             // Calculate postfix result and store it in the data
@@ -60,10 +69,10 @@ namespace Project2_Group_4
             // Display postfix results
 
             // Display all results
-            Console.WriteLine($"Sno\t{"Infix".PadRight(20, ' ')} {"Prefix".PadRight(15, ' ')} {"Postfix".PadRight(15, ' ')} {"Prefix Result".PadRight(15, ' ')} {"Postfix Result".PadRight(15, ' ')} {"Match".PadRight(15, ' ')}");
+            Console.WriteLine($"Sno\t{"Infix",-20} {"Prefix",-17} {"Postfix",-17} {"Prefix Result",-15} {"Postfix Result",-15} {"Match",-15}");
             foreach (Data d in dataset)
             {
-                Console.WriteLine($"{d.Sno}\t{d.Infix.PadRight(20, ' ')} {d.Prefix.PadRight(15, ' ')} {d.Postfix.PadRight(15, ' ')} {d.PrefixResult.PadRight(15, ' ')} {d.PostfixResult.PadRight(15, ' ')} {"Match".PadRight(15, ' ')}");
+                Console.WriteLine($"{d.Sno}\t{d.Infix,-20} {d.Prefix,-17} {d.Postfix,-17} {d.PrefixResult,-15} {d.PostfixResult,-15} {"Match",-15}");
             }
 
             // Prompt user if they want to view the results in XML format
