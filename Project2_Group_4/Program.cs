@@ -1,4 +1,10 @@
-﻿using Project2_Group_4.Conversions;
+﻿/* Group:       4
+ * Programmers: Anthony Merante, Colin Manliclic, Zina Long
+ * Date:        April 6, 2021
+ * 
+ * Purpose: Driver program for reading in and displaying the program
+ */
+using Project2_Group_4.Conversions;
 using Project2_Group_4.FileClasses;
 using Project2_Group_4.Expressions;
 using System;
@@ -12,17 +18,19 @@ namespace Project2_Group_4
     {
         static void Main(string[] args)
         {
+            // File paths
             const string DATA_PATH = "./Data/Project 2_INFO_5101.csv";
             const string XML_PATH = "./Data/Project2_INFO_5101.xml";
             // Load data
             List<Data> dataset = CSVFile.CSVDeserialize(DATA_PATH);
 
+            // Print infix equations
             Console.WriteLine("\nSno \tInfix");
             foreach (Data result in dataset)
             {
                 Console.WriteLine(result.Sno + ":\t" + result.Infix);
             }
-            // Convert to postfix and store it in the data
+            // Convert to postfix and store it in the data and then print
             PostfixConversion post = new PostfixConversion(dataset);
             int count = 0;
             Console.WriteLine("\nSno \tPostfix");
@@ -32,7 +40,7 @@ namespace Project2_Group_4
                 Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Postfix);
                 count++;
             }
-            // Convert to prefix and store it in the data
+            // Convert to prefix and store it in the data and then print
             PrefixConversion pre = new PrefixConversion(dataset);
             count = 0;
             Console.WriteLine("\nSno \tPrefix");
@@ -42,7 +50,7 @@ namespace Project2_Group_4
                 Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Prefix);
                 count++;
             }
-            // Calculate postfix result and store it in the data
+            // Calculate postfix result and store it in the data and then print
             count = 0;
             Console.WriteLine("\nSno \tPostFix Results");
             foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
@@ -52,7 +60,7 @@ namespace Project2_Group_4
                 count++;
             }
 
-            // Calculate prefix result and store it in the data
+            // Calculate prefix result and store it in the data and then print
             count = 0;
             Console.WriteLine("\nSno \tPrefix Results");
             foreach (string result in ExpressionEvaluation.PrefixEvaluate(pre.Convert()))

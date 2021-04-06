@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* Group:       4
+ * Programmers: Anthony Merante, Colin Manliclic, Zina Long
+ * Date:        April 6, 2021
+ * 
+ * Purpose: Conversion method to convert infix to prefix notation
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +15,18 @@ namespace Project2_Group_4.Conversions
 {
     public class PrefixConversion
     {
+        // Data Member
         private List<Data> Dataset;
-
+        // Constructor
         public PrefixConversion(List<Data> d)
         {
             Dataset = d;
         }
-
+        /// <summary>
+        /// Converts all Data objects infix equation to prefix. 
+        /// Uses yield to loop through the dataset
+        /// </summary>
+        /// <returns>An IEnumerable representing the most recent conversion</returns>
         public IEnumerable<string> Convert()
         {
             try
@@ -67,9 +79,14 @@ namespace Project2_Group_4.Conversions
             }
             finally
             {
-
+                // Do nothing: this stops the iterator/yield
             }
         }
+        /// <summary>
+        /// Gets operator precendce
+        /// </summary>
+        /// <param name="ch">the operator</param>
+        /// <returns>An int representing the operators precendence</returns>
         private int GetPrecedence(char ch)
         {
             switch (ch)

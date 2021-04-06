@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* Group:       4
+ * Programmers: Anthony Merante, Colin Manliclic, Zina Long
+ * Date:        April 6, 2021
+ * 
+ * Purpose: To read and load csv data into a list for evaluating
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
