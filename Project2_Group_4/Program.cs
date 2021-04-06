@@ -29,6 +29,7 @@ namespace Project2_Group_4
             Console.WriteLine("Sno \tPostfixEVAL");
             foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
             {
+                dataset[count].PostfixResult = result;
                 Console.WriteLine(count + ":\t" + result);
                 count++;
             }
