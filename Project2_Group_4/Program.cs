@@ -3,6 +3,7 @@ using Project2_Group_4.FileClasses;
 using Project2_Group_4.Expressions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Project2_Group_4
 {
@@ -53,7 +54,12 @@ namespace Project2_Group_4
             // Display all results
 
             // Prompt user if they want to view the results in XML format
-
+            using (StreamWriter outputFile = new StreamWriter(@"../../../Data/Project2_INFO_5101.xml"))
+            {
+                outputFile.WriteStartDocument();
+                outputFile.WriteStartRootElement();
+                outputFile.WriteEndRootElement();
+            }
         }
     }
 }
