@@ -16,43 +16,58 @@ namespace Project2_Group_4
             // Load data
             List<Data> dataset = CSVFile.CSVDeserialize(DATA_PATH);
 
+            Console.WriteLine("\nSno \tInfix");
+            foreach (Data result in dataset)
+            {
+                Console.WriteLine(result.Sno + ":\t" + result.Infix);
+            }
             // Convert to postfix and store it in the data
             PostfixConversion post = new PostfixConversion(dataset);
             int count = 0;
-            Console.WriteLine("Sno \tPostfix");
-            foreach(string result in post.Convert())
+            Console.WriteLine("\nSno \tPostfix");
+            foreach (string result in post.Convert())
             {
                 dataset[count].Postfix = result;
-                Console.WriteLine(count + ":\t" + dataset[count].Postfix);
+                Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Postfix);
                 count++;
             }
-            //Postfix evaluation
+            // Convert to prefix and store it in the data
+            PrefixConversion pre = new PrefixConversion(dataset);
             count = 0;
-            Console.WriteLine("Sno \tPostfixEVAL");
+            Console.WriteLine("\nSno \tPrefix");
+            foreach (string result in pre.Convert())
+            {
+                dataset[count].Prefix = result;
+                Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Prefix);
+                count++;
+            }
+            // Calculate postfix result and store it in the data
+            count = 0;
+            Console.WriteLine("\nSno \tPostFix Results");
             foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
             {
+                dataset[count].PostfixResult = result;
                 Console.WriteLine(count + ":\t" + result);
                 count++;
             }
 
-            // Convert to prefix and store it in the data
-            PrefixConversion pre = new PrefixConversion(dataset);
+            // Calculate prefix result and store it in the data
             count = 0;
-            Console.WriteLine("Sno \tPostfix");
-            foreach (string result in pre.Convert())
+            Console.WriteLine("\nSno \tPrefix Results");
+            foreach (string result in ExpressionEvaluation.PreFixEvaluate(pre.Convert()))
             {
-                dataset[count].Prefix = result;
-                Console.WriteLine(count + ":\t" + dataset[count].Prefix);
+                dataset[count].PrefixResult = result;
+                Console.WriteLine(count + ":\t" + result);
                 count++;
             }
-            // Calculate postfix result and store it in the data
-            // Calculate prefix result and store it in the data
-
-            // Display prefix results 
-
-            // Display postfix results
 
             // Display all results
+            CompareExpressions ce = new CompareExpressions();
+            Console.WriteLine($"\nSno\t{"Infix",-20} {"Prefix",-17} {"Postfix",-17} {"Prefix Result",-15} {"Postfix Result",-15} {"Match",-15}");
+            foreach (Data d in dataset)
+            {
+                Console.WriteLine($"{d.Sno}\t{d.Infix,-20} {d.Prefix,-17} {d.Postfix,-17} {d.PrefixResult,-15} {d.PostfixResult,-15} {(ce.Compare(d.PrefixResult, d.PostfixResult) == 1 ? "True" : "False"),-15}");
+            }
 
             // Prompt user if they want to view the results in XML format
             using (StreamWriter outputFile = new StreamWriter(XML_PATH))
