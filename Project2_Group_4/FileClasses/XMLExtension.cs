@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Group:       4
+ * Programmers: Anthony Merante, Colin Manliclic, Zina Long
+ * Date:        April 6, 2021
+ * Purpose:     XML Extension that extends StreamWriter to interact with the Program to write an XML file of the results.
+ */
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
