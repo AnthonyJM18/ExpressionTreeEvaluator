@@ -21,7 +21,7 @@ namespace Project2_Group_4
             foreach(string result in post.Convert())
             {
                 dataset[count].Postfix = result;
-                Console.WriteLine(count + ":\t" + dataset[count].Postfix);
+                Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Postfix);
                 count++;
             }
             //Postfix evaluation
@@ -30,7 +30,7 @@ namespace Project2_Group_4
             foreach (string result in ExpressionEvaluation.PostFixEvaluate(post.Convert()))
             {
                 dataset[count].PostfixResult = result;
-                Console.WriteLine(count + ":\t" + result);
+                Console.WriteLine(dataset[count].Sno + ":\t" + result);
                 count++;
             }
 
@@ -41,7 +41,7 @@ namespace Project2_Group_4
             foreach (string result in pre.Convert())
             {
                 dataset[count].Prefix = result;
-                Console.WriteLine(count + ":\t" + dataset[count].Prefix);
+                Console.WriteLine(dataset[count].Sno + ":\t" + dataset[count].Prefix);
                 count++;
             }
             // Calculate postfix result and store it in the data
