@@ -69,10 +69,10 @@ namespace Project2_Group_4
             // Display postfix results
 
             // Display all results
-            Console.WriteLine($"Sno\t{"Infix",-20} {"Prefix",-15} {"Postfix",-15} {"Prefix Result",-15} {"Postfix Result",-15} {"Match",-15}");
+            Console.WriteLine($"Sno\t{"Infix",-20} {"Prefix",-17} {"Postfix",-17} {"Prefix Result",-15} {"Postfix Result",-15} {"Match",-15}");
             foreach (Data d in dataset)
             {
-                Console.WriteLine($"{d.Sno}\t{d.Infix,-20} {d.Prefix,-15} {d.Postfix,-15} {d.PrefixResult,-15} {d.PostfixResult,-15} {"Match",-15}");
+                Console.WriteLine($"{d.Sno}\t{d.Infix,-20} {d.Prefix,-17} {d.Postfix,-17} {d.PrefixResult,-15} {d.PostfixResult,-15} {"Match",-15}");
             }
 
             // Prompt user if they want to view the results in XML format
