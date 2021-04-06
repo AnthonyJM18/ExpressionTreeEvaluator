@@ -31,5 +31,16 @@ namespace Project2_Group_4.Expressions
                     return "ERROR: Operand does not exist.";
             }
         }
+        public IEnumerable<string> PostFixEvaluate(IEnumerable<string> postFixDataSet)
+        {
+            try
+            {
+
+            }
+            finally
+            {
+                // Do nothing: this stops the iterator/yield
+            }
+        }
     }
 }
