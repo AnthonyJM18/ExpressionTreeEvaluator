@@ -52,7 +52,7 @@ namespace Project2_Group_4
             // Calculate prefix result and store it in the data
             count = 0;
             Console.WriteLine("\nSno \tPrefix Results");
-            foreach (string result in ExpressionEvaluation.PreFixEvaluate(pre.Convert()))
+            foreach (string result in ExpressionEvaluation.PrefixEvaluate(pre.Convert()))
             {
                 dataset[count].PrefixResult = result;
                 Console.WriteLine(count + ":\t" + result);

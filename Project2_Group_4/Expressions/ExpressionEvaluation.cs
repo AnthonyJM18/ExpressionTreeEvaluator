@@ -1,19 +1,33 @@
-﻿using System;
+﻿/* Group:       4
+ * Programmers: Anthony Merante, Colin Manliclic, Zina Long
+ * Date:        April 6, 2021
+ * 
+ * Purpose:     Class to evaluate prefix or postfix expressions
+ */
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace Project2_Group_4.Expressions
 {
     class ExpressionEvaluation
     {
-        private static string Evaluate(double left, double right, string operand)
+        /// <summary>
+        /// Uses binary tree to evaluate a left node, right node and operator. 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="operatorString"></param>
+        /// <returns>Returns evaluation of a left and right operand and operator string</returns>
+        private static string Evaluate(double left, double right, string operatorString)
         {
+            // operands
             var leftNode = Expression.Constant(left);
             var rightNode = Expression.Constant(right);
-            switch (operand)
+
+            // operator switch case
+            switch (operatorString)
             {
                 case "+":
                     var additionExpression = Expression.Add(leftNode, rightNode);
@@ -31,6 +45,11 @@ namespace Project2_Group_4.Expressions
                     return "ERROR: Operand does not exist.";
             }
         }
+        /// <summary>
+        /// Evaluates a data set of post fix expressions and returns a collection of the results
+        /// </summary>
+        /// <param name="postFixDataSet"></param>
+        /// <returns>string IEnumerable of post fix results</returns>
         public static IEnumerable<string> PostFixEvaluate(IEnumerable<string> postFixDataSet)
         {
             try
@@ -41,15 +60,20 @@ namespace Project2_Group_4.Expressions
                     string answer;
                     for (int j = 0; j < postFixData.Length; j++)
                     {
+                        // if beginning of post fix expression is not a digit
                         if (!char.IsDigit(postFixData[j]))
                         {
+                            // pop stack to right and left node
                             double rightNode = Convert.ToDouble(stack.Pop());
                             double leftNode = Convert.ToDouble(stack.Pop());
+
+                            // evaluate the answer and push to stack
                             answer = Evaluate(leftNode, rightNode, postFixData[j].ToString());
                             stack.Push(answer);
                         }
                         else
                         {
+                            // just push to stack if it is a digit
                             stack.Push(postFixData.Substring(j, 1));
                         }
                     }
@@ -61,28 +85,34 @@ namespace Project2_Group_4.Expressions
                 // Do nothing: this stops the iterator/yield
             }
         }
-
-        public static IEnumerable<string> PreFixEvaluate(IEnumerable<string> preFixDataSet)
+        /// <summary>
+        /// Evaluates a data set of prefix expressions and returns a collection of the results
+        /// </summary>
+        /// <param name="prefixDataSet"></param>
+        /// <returns>string IEnumerable of prefix results</returns>
+        public static IEnumerable<string> PrefixEvaluate(IEnumerable<string> prefixDataSet)
         {
             try
             {
-                foreach (var preFixData in preFixDataSet)
+                foreach (var prefixData in prefixDataSet)
                 {
                     Stack<string> stack = new Stack<string>();
                     string answer;
-                    for (int j = preFixData.Length - 1; j >= 0; j--)
+                    for (int j = prefixData.Length - 1; j >= 0; j--)
                     {
                         // if operand push to stack
-                        if (char.IsDigit(preFixData[j]))
+                        if (char.IsDigit(prefixData[j]))
                         {
-                            stack.Push(preFixData[j].ToString());
+                            stack.Push(prefixData[j].ToString());
                         }
                         else
                         {
+                            // pop stack to get left and right node
                             double leftNode = Convert.ToDouble(stack.Pop());
                             double rightNode = Convert.ToDouble(stack.Pop());
 
-                            answer = Evaluate(leftNode, rightNode, preFixData[j].ToString());
+                            // evaluate answer and push to stack
+                            answer = Evaluate(leftNode, rightNode, prefixData[j].ToString());
                             stack.Push(answer);
                         }
                     }
