@@ -41,12 +41,11 @@ namespace Project2_Group_4.Expressions
                     string answer;
                     for (int j = 0; j < postFixData.Length; j++)
                     {
-                        string c = postFixData.Substring(j, 1);
-                        if (!char.IsDigit(c[0]))
+                        if (!char.IsDigit(postFixData[j]))
                         {
                             double rightNode = Convert.ToDouble(stack.Pop());
                             double leftNode = Convert.ToDouble(stack.Pop());
-                            answer = Evaluate(leftNode, rightNode, c);
+                            answer = Evaluate(leftNode, rightNode, postFixData[j].ToString());
                             stack.Push(answer);
                         }
                         else
